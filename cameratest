@@ -13,11 +13,9 @@ cap.set(4,100)              # Set height of the image as 100 pixels
 #cap.set(5,15)
               
 def talker():
-    pub=rospy.Publisher('video_topic',Image,queue_size=10) #Set the node as a publisher of Image messages in 'video_topic'
-    rospy.init_node('transmiter',anonymous = True)  #Initialize the node as 'transmiter'
     while not rospy.is_shutdown():
         ret, frame = cap.read() # get "frame" The RGB matrix (Image from Opencv)
-        pub.publish(br.cv2_to_imgmsg(frame,"bgr8")) # Convert the RGB matrix to ROS image message and finally publish
+        cv2.imshow("video",frame)
         cv2.waitKey(1)    
 
 if __name__ == '__main__':
