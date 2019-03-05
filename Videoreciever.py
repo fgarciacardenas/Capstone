@@ -24,4 +24,5 @@ def videoreciever():
 if __name__ == '__main__':
     try:
         videoreciever()                  # run the code 
-    except rospy.ROSInterruptExecption:  # Allow code to be interrupt via ROS        pass
+    except rospy.ROSInterruptExecption:  # Allow code to be interrupt via ROS        
+        pass
