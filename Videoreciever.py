@@ -10,8 +10,9 @@ br = CvBridge()      # Initialize cvbridge
 
 def callback(data):  #define what the code should do when recieves a new message
     try:
-        frame = br.imgmsg_to_cv2(data,"bgr8") # declare frame as the convertion of ROS image to opencv image (BGR 8 bits)
-        cv2.imshow("frame",frame)        # show the image  
+        image = br.imgmsg_to_cv2(data,"bgr8") # declare frame as the convertion of ROS image to opencv image (BGR 8 bits)
+        resize_image = cv2.resize (image,none,fx=2,fy=2)  # resize the image in a factor of 2 for both hieght amd width
+        cv2.imshow("Video",resize_image)        # show the image  
         cv2.waitKey(1)
     except CvBridgeError as e:
         print(e)
@@ -24,5 +25,5 @@ def videoreciever():
 if __name__ == '__main__':
     try:
         videoreciever()                  # run the code 
-    except rospy.ROSInterruptExecption:  # Allow code to be interrupt via ROS        
+    except rospy.ROSInterruptException:  # Allow code to be interrupt via ROS        
         pass
