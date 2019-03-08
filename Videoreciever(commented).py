@@ -16,11 +16,12 @@ def callback(data):
         image = br.imgmsg_to_cv2(data,"bgr8") 
         
         # resize the image in a factor of 2 for both hieght amd width
-        resize_image = cv2.resize (image,none,fx=2,fy=2)  
+        resize_image = cv2.resize (image,(0,0),fx=4,fy=4,interpolation=cv2.INTER_CUBIC)  
         
         # show the image
         cv2.imshow("Video",resize_image)         
-        cv2.waitKey(1)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
         
     except CvBridgeError as e:
         print(e)
@@ -35,9 +36,8 @@ def videoreciever():
 
 if __name__ == '__main__':
     try:
-        # run the code 
-        videoreciever()         
-        
-    # Allow code to be interrupt via ROS 
-    except rospy.ROSInterruptException:         
+        videoreciever()                     # Run the code
+    except rospy.ROSInterruptException:  # Allow code to be interrupt via ROS        
+        cap.release()
+        cv2.destroyAllWindows()
         pass
