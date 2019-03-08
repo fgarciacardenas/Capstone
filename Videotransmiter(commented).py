@@ -16,9 +16,12 @@ def talker():
     pub=rospy.Publisher('video_topic',Image,queue_size=10) #Set the node as a publisher of Image messages in 'video_topic'
     rospy.init_node('transmiter',anonymous = True)  #Initialize the node as 'transmiter'
     while not rospy.is_shutdown():
-        ret, frame = cap.read() # get "frame" The RGB matrix (Image from Opencv)
-        pub.publish(br.cv2_to_imgmsg(frame,"bgr8")) # Convert the RGB matrix to ROS image message and finally publish
-        cv2.waitKey(1)    
+        ret, img = cap.read() # get "frame" The RGB matrix (Image from Opencv)
+        img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        ros_img = br.cv2_to_imgmsg(img_gray,"mono8")
+        pub.publish(ros_img) # Convert the RGB matrix to ROS image message and finally publish
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 if __name__ == '__main__':
     try:
@@ -26,4 +29,6 @@ if __name__ == '__main__':
         #cap.release()
         #cv2.destroyAllWindows()
     except rospy.ROSInterruptException:  # Allow code to be interrupt via ROS        
+        cap.release()
+        cv2.destroyAllWindows()
         pass
