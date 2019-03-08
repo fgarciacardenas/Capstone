@@ -12,10 +12,10 @@ br = CvBridge()
 #define what the code should do when recieves a new message
 def callback(data):  
     try:
-        # declare frame as the convertion of ROS image to opencv image (BGR 8 bits)
-        image = br.imgmsg_to_cv2(data,"bgr8") 
+        # declare frame as the convertion of ROS image to opencv image (gray scale 8 bits)
+        image = br.imgmsg_to_cv2(data,"mono8") 
         
-        # resize the image in a factor of 2 for both hieght amd width
+        # resize the image in a factor of 4 for both hight amd width using cubic interpolation method
         resize_image = cv2.resize (image,(0,0),fx=4,fy=4,interpolation=cv2.INTER_CUBIC)  
         
         # show the image
