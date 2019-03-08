@@ -26,8 +26,6 @@ def talker():
 if __name__ == '__main__':
     try:
         talker()                     # Run the code
-        #cap.release()
-        #cv2.destroyAllWindows()
     except rospy.ROSInterruptException:  # Allow code to be interrupt via ROS        
         cap.release()
         cv2.destroyAllWindows()
