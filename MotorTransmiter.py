@@ -3,7 +3,6 @@
 from __future__ import division
 import serial
 import rospy
-import time
 from std_msgs.msg import String  #String message type for publishing
 
 #Map function from arduino
@@ -97,19 +96,19 @@ try:
         if (FlagXS == True and FlagYS == True):
             M = str(0)+"/"+str(0)+"/"+str(0)+"/"+str(0)
             
-        if (FlagYP == True and FlagXS == True):
+        elif (FlagYP == True and FlagXS == True):
             M = str(Velyright)+"/"+str(0)+"/"+str(0)+"/"+str(Velyright)
             
-        if (FlagYN == True and FlagXS == True):
+        elif (FlagYN == True and FlagXS == True):
             M = str(0)+"/"+str(Velyleft)+"/"+str(Velyleft)+"/"+str(0)
             
-        if (FlagXP == True and FlagYS == True):
+        elif (FlagXP == True and FlagYS == True):
             M = str(0)+"/"+str(Velxfront)+"/"+str(0)+"/"+str(Velxfront)
             
-        if (FlagXN == True and FlagYS == True):
+        elif (FlagXN == True and FlagYS == True):
             M = str(Velxback)+"/"+str(0)+"/"+str(Velxback)+"/"+str(0)
             
-        if (FlagXP == True and FlagYS == False):
+        elif (FlagXP == True and FlagYS == False):
 
             if(FlagYP == True):
                 DerB = Velxfrontright
@@ -121,7 +120,7 @@ try:
 
             M = str(0)+"/"+str(DerB)+"/"+str(0)+"/"+str(IzqB)
             
-        if (FlagXN == True and FlagYS == False):
+        elif (FlagXN == True and FlagYS == False):
 
             if (FlagYP == 1):
                 DerA = Velxbackright
