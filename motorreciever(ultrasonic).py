@@ -3,7 +3,7 @@ from __future__ import division
 import time
 import RPi.GPIO as GPIO
 import rospy
-from std_msgs.msg import String #String message type
+from std_msgs.msg import String,Bool  #String message type
 
 #Disables warnings and sets up BCM GPIO numbering
 GPIO.setwarnings(False)
@@ -27,36 +27,40 @@ pwm_B1.start(0)
 pwm_A2.start(0)
 pwm_B2.start(0)
 
-def callback2(data):
-    global joystick = data
+#Variable for the ultrasonic detection
+distance = 0
 
+#Function that will execute everytime a boolean value from the ultrasonic is rece$
+def callback2(data):
+    global distance
+    distance = data.data
+    
 #Defines function that will execute every time a message is received
 def callback(data):
-    
+
     #Assigns the data received to a variable and split it for each PWM
     V = data.data
     cmd = V.split("/")
     #print V
-  
+
+    if (distance == 1):
+        V1 = 0
+        V2 = 20
+        V3 = 0
+        V4 = 20
+    else:
+        pass
+
     #Assigns each PWM to a variable
     V1 = int(cmd[0])
     V2 = int(cmd[1])
     V3 = int(cmd[2])
     V4 = int(cmd[3])
     
-    if joystick == 1:     # declare values 
-        #v1 =  
-        #v2 =
-        #v3 = 
-        #v4 =
-    else:
-        pass
-
     #Prints the PWM values
-    #print V1, V2, V3, V4
-    
-    #Changes the Duty cycles
+    print V1, V2, V3, V4
 
+    #Changes the Duty cycles
     pwm_A1.ChangeDutyCycle(V1)
     pwm_B1.ChangeDutyCycle(V2)
     pwm_A2.ChangeDutyCycle(V3)
@@ -64,10 +68,12 @@ def callback(data):
 
 def listener():
     rospy.init_node('RMotores', anonymous=True) #Tells rospy the name of this node
-    rospy.Subscriber("joystick_topic", String, callback1) #Declares that the node subscrbes to the 'joystick_topic' topic whose message type is String. 'callback' function is invoked when messages are received
-    rospy.Subscriber("ultrasonico", bool, callback2)
+    rospy.Subscriber("distance_topic", Bool, callback2) #Decalres that the node s$
+    rospy.Subscriber("joystick_topic", String, callback) #Declares that the node $
     rospy.spin() #Keeps the node from exiting until the node has been shutdown.
 
 #Checks if this module has been imported
 if __name__ == '__main__':
     listener() #Invokes listener function
+
+
