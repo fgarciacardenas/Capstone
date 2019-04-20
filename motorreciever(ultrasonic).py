@@ -49,13 +49,10 @@ def callback(data):
         V3 = 0
         V4 = 20
     else:
-        pass
-
-    #Assigns each PWM to a variable
-    V1 = int(cmd[0])
-    V2 = int(cmd[1])
-    V3 = int(cmd[2])
-    V4 = int(cmd[3])
+        V1 = int(cmd[0])
+        V2 = int(cmd[1])
+        V3 = int(cmd[2])
+        V4 = int(cmd[3])
     
     #Prints the PWM values
     print V1, V2, V3, V4
@@ -75,5 +72,3 @@ def listener():
 #Checks if this module has been imported
 if __name__ == '__main__':
     listener() #Invokes listener function
-
-
