@@ -43,6 +43,8 @@ def callback(data):
     cmd = V.split("/")
     #print V
 
+    #The robot go backwards if the distance between it and the obstacle is less or equal to the minimum distance estabished, 
+    #otherwise the car moves normally according to the joystick
     if (distance == 1):
         V1 = 0
         V2 = 20
