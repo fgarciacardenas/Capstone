@@ -67,8 +67,8 @@ def callback(data):
 
 def listener():
     rospy.init_node('RMotores', anonymous=True) #Tells rospy the name of this node
-    rospy.Subscriber("distance_topic", Bool, callback2) #Decalres that the node s$
-    rospy.Subscriber("joystick_topic", String, callback) #Declares that the node $
+    rospy.Subscriber("distance_topic", Bool, callback2) #Decalres that the node  subscribes to the distance_topic whose message type is boolean. 'callback2' function is invoked when messages are received.
+    rospy.Subscriber("joystick_topic", String, callback) #Declares that the node subscrbes to the 'joystick_topic' topic whose message type is String. 'callback' function is invoked when messages are received.
     rospy.spin() #Keeps the node from exiting until the node has been shutdown.
 
 #Checks if this module has been imported
