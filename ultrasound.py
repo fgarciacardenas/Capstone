@@ -8,9 +8,9 @@ import rospy
 from std_msgs.msg import Bool
 
 # Set up IN/OUT pins, location and status
-GPIO.setmode(GPIO.BOARD)
-PIN_TRIGGER = 7
-PIN_ECHO = 11
+GPIO.setmode(GPIO.BCM)
+PIN_TRIGGER = 4
+PIN_ECHO = 17
 GPIO.setup(PIN_TRIGGER, GPIO.OUT)
 GPIO.setup(PIN_ECHO, GPIO.IN)
 GPIO.output(PIN_TRIGGER, GPIO.LOW)
